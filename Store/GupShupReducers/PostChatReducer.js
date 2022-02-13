@@ -9,7 +9,7 @@ const slice = createSlice({
   reducers: {
     SaveChat: (chat, {payload}) => {
       const filterData = chat.chat.filter(
-        (item, index) => Object.keys(item)[index] === payload.userData.user,
+        (item, index) => Object.keys(item)[0] == payload.userData.user,
       );
       const filteredUserDetail = filterData[0];
       filteredUserDetail[Object.keys(filteredUserDetail)[0]]?.messages.push(

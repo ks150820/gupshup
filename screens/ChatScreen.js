@@ -28,7 +28,6 @@ const ChatScreen = props => {
   const getUserDetails = useSelector(state => state.entities.chat.chat);
 
   const userName = props.route.params && props.route.params.username;
-  console.log('username ->', userName);
 
   useLayoutEffect(() => {
     props.navigation.setOptions({
@@ -44,13 +43,16 @@ const ChatScreen = props => {
   }, [props]);
 
   useEffect(() => {
-    const filterData = getUserDetails.filter(
-      (item, index) => Object.keys(item)[index] === userName,
-    );
+    let filterData;
+    if (getUserDetails.length > 0) {
+      filterData = getUserDetails.filter(
+        (item, index) => item && Object.keys(item)[0] == userName,
+      );
+    }
 
     const first = filterData[0];
-    setUserData(first[Object.keys(first)[0]].messages);
-  }, [getUserDetails]);
+    setUserData(first[userName].messages);
+  }, [getUserDetails, setUserData]);
 
   const handleSendChat = () => {
     let num = activeNumber + 1;
@@ -67,6 +69,7 @@ const ChatScreen = props => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+      {/* {getUserDetail()} */}
       <StatusBar backgroundColor="tomato" />
       <KeyboardAvoidingView
         style={styles.container}

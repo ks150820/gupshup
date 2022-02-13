@@ -90,6 +90,6 @@ const styles = StyleSheet.create({
     right: -3,
     fontWeight: 'bold',
     zIndex: 1099,
-    position: "absolute"
+    position: 'absolute',
   },
 });
